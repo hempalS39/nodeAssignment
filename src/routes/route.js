@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
+router.post('/test-me', function (req, res) {
     // let a = { msg: "My first ever API response in JSON !!"} 
 
 
@@ -52,12 +52,51 @@ router.post('/test-post1', function (req, res) {
     res.send( {  msg: "hi guys"  }   )
 });
 
+// =====================================================================================================
+
+
+let obj = [
+    {
+      "name": "manish",
+      "dob": "1/1/1995",
+      "gender": "male",
+      "city": "jalandhar",
+      "sports": [
+          "swimming"
+      ]
+  },
+  {
+      "name": "gopal",
+      "dob": "1/09/1995",
+      "gender": "male",
+      "city": "delhi",
+      "sports": [
+          "soccer"
+      ],
+  },
+  {
+      "name": "lokesh",
+      "dob": "1/1/1990",
+      "gender": "male",
+      "city": "mumbai",
+      "sports": [
+          "soccer"
+      ],
+  },
+]
+
 
 // to send data in  post request-> prefer sending in BODY -> click body-raw-json
-router.post('/test-post2', function (req, res) {
+router.post('/test-player', function (req, res) {
     let data= req.body
     console.log(data)
-    res.send( {  msg: "hi guys..my 2nd post req"  }   )
+    obj.map(function(x){
+        if(x.name == data.name){
+           return res.send("player already exist")
+        }
+        
+    })
+    res.send( {  msg: "hi guys..my 2nd post req", newPlayer : obj  }   )
 });
 
 
